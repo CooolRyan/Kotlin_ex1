@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Kotlin_ex1</string>
+    <string name="roll_label">Roll</string>
+    <string name="result_text">result</string>
+</resources>
