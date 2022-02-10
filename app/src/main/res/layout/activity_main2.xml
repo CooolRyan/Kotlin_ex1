@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<fragment
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.MapFragment"
-    android:layout_width= "match_parent"
-    android:layout_height= "match_parent"
-    map:cameraTargetLat="37.54"
-    map:cameraTargetLng="126.98"
-    map:cameraZoom="10"
-    tools:context=".main">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mapview"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        tools:layout="@layout/abc_search_view" />
 
-</fragment>
+    <Button
+        android:id="@+id/review1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리뷰1"
+        />
 
+    <Button
+        android:id="@+id/review2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리뷰2"
+        />
+
+</LinearLayout>

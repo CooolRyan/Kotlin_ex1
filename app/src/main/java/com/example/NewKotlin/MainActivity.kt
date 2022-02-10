@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginBtn= findViewById<Button>(R.id.login) //null 참조 오류 -> xml 참조 후 실행하도록
         val joinBtn= findViewById<Button>(R.id.join)
-        val viewDB= findViewById<Button>(R.id.view)
+        //val viewDB= findViewById<Button>(R.id.view)
 
         //edtName=findViewById(R.id.editNameResult)
         //edtNum=findViewById(R.id.editNumResult)
