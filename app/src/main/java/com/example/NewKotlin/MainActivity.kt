@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var editid : EditText
     lateinit var editpw : EditText
     lateinit var  sqlDB :SQLiteDatabase
-    lateinit var edtName:EditText
-    lateinit var edtNum:EditText
+   // lateinit var edtName:EditText
+   // lateinit var edtNum:EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         val joinBtn= findViewById<Button>(R.id.join)
         val viewDB= findViewById<Button>(R.id.view)
 
-        edtName=findViewById(R.id.editNameResult)
-        edtNum=findViewById(R.id.editNumResult)
+        //edtName=findViewById(R.id.editNameResult)
+        //edtNum=findViewById(R.id.editNumResult)
 
         editid= findViewById<EditText>(R.id.id)
         editpw= findViewById<EditText>(R.id.password)
@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
+
+        /*
         viewDB.setOnClickListener {
             sqlDB=localDB.readableDatabase
             var cur:Cursor
@@ -69,6 +71,10 @@ class MainActivity : AppCompatActivity() {
             edtName.setText(strid)
             edtNum.setText(strpw)
         }
+
+
+         */
+
         joinBtn.setOnClickListener {
             var intentregi= Intent(applicationContext, Register::class.java)
             startActivity(intentregi)

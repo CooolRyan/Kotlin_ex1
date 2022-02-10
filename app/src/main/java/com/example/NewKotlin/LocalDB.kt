@@ -12,8 +12,9 @@ class LocalDB (context: Context?, name: String?, factory: SQLiteDatabase.CursorF
 
     override fun onCreate(db:SQLiteDatabase?){
         if (db!= null){
-            var sql:String ="CREATE TABLE if not exists localDB ("+ "NAME varchar(20)," + "ID varchar(20), " + "PASSWORD varchar(20),"+ "PASSWORD_OK varchar(20));"
-            db.execSQL(sql)
+            //var sql:String ="CREATE TABLE if not exists localDB ("+ "NAME varchar(20)," + "ID varchar(20), " + "PASSWORD varchar(20),"+ "PASSWORD_OK varchar(20));"
+            db.execSQL("CREATE TABLE localDB(NAME TEXT," +
+                    "ID TEXT, PASSWORD TEXT, PASSWORD_OK TEXT);")
         }
     }
 
@@ -26,10 +27,22 @@ class LocalDB (context: Context?, name: String?, factory: SQLiteDatabase.CursorF
         name: String, id: String, password: String, password_ok: String) {
         var db: SQLiteDatabase = writableDatabase
 
+
         db.execSQL(
             "INSERT INTO localDB VALUES('" + name + "'" + ", '" + id + "'" + ", '" + password + "'" + ", '" + password_ok + "');"
         )
         db.close()
+
+        /*
+        val values=ContentValues().apply {
+            put(name,name)
+            put(id,id)
+            put(password, password)
+            put(password_ok,password_ok)
+        }
+        val A=db?.insert(LocalDB,null,values)
+
+         */
     }
 
     fun Result(ID:String, PASSWORD:String):Boolean{
