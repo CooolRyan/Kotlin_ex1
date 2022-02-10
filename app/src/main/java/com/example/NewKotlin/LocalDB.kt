@@ -27,7 +27,7 @@ class LocalDB (context: Context?, name: String?, factory: SQLiteDatabase.CursorF
         var db: SQLiteDatabase = writableDatabase
 
         db.execSQL(
-            "INSERT INTO MEMBER VALUES('" + name + "'" + ", '" + id + "'" + ", '" + password + "'" + ", '" + password_ok + "');"
+            "INSERT INTO localDB VALUES('" + name + "'" + ", '" + id + "'" + ", '" + password + "'" + ", '" + password_ok + "');"
         )
         db.close()
     }
@@ -36,7 +36,7 @@ class LocalDB (context: Context?, name: String?, factory: SQLiteDatabase.CursorF
         var db:SQLiteDatabase=readableDatabase
         var result:String=""
 
-        var cursor: Cursor = db.rawQuery("SELECT ID, PASSWORD FROM MEMBER", null)
+        var cursor: Cursor = db.rawQuery("SELECT ID, PASSWORD FROM localDB", null)
         while (cursor.moveToNext()) {
             result = (cursor.getString(0))
             if (result.equals(ID)) {

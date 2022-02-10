@@ -32,7 +32,7 @@
             android:name=".review2"
             android:exported="false" />
         <activity
-            android:name=".Review"
+            android:name=".review"
             android:exported="false" />
         <activity
             android:name=".Register"

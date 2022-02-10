@@ -9,31 +9,35 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.NewKotlin.databinding.ActivityMainBinding
-import kotlin
 
 class MainActivity : AppCompatActivity() {
 
-    private var mbinding:ActivityMainBinding?=null
-    private val binding get()= mbinding!!
 
-    var loginBtn=findViewById<Button>(R.id.login)
-    var joinBtn=findViewById<Button>(R.id.join)
+    lateinit var editid : EditText
+    lateinit var editpw : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mbinding= ActivityMainBinding.inflate(layoutInflater)
+
+        val loginBtn= findViewById<Button>(R.id.login) //null 참조 오류 -> xml 참조 후 실행하도록
+        val joinBtn= findViewById<Button>(R.id.join)
+
+        editid= findViewById<EditText>(R.id.id)
+        editpw= findViewById<EditText>(R.id.password)
+
+        /*mbinding= ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-        setContentView(view)
+        setContentView(view)*/
 
 
         var localDB: LocalDB = LocalDB(applicationContext, "LocalDB.db", null, 1) // SQLite 모듈 생성
 
         loginBtn.setOnClickListener {
-            val id=binding.id.text.toString()
-            val pw=binding.password.text.toString()
-            if(localDB.Result(bind.id.getText().toString(), bind.password.getText().toString())==true){
+            val id=editid.text.toString()
+            val pw=editpw.text.toString()
+            if(localDB.Result(id,pw)==true){
                 Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                 var intentmain= Intent(applicationContext, main::class.java)
                 startActivity(intentmain)
@@ -50,10 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onDestroy() {// 엑티비티가 종료시 close
-        localDB.close()
-        super.onDestroy()
-    }
 }
 
 
