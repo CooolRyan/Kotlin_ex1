@@ -1,45 +1,55 @@
 package com.example.NewKotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.widget.Button
-import android.widget.TextView
-import android.content.Intent
+import android.widget.EditText
 import android.widget.Toast
-
+import com.example.NewKotlin.databinding.ActivityMainBinding
+import kotlin
 
 class MainActivity : AppCompatActivity() {
-    //val DATABASE_VERSION = 1
-    //val DATABASE_NAME = "LocalDB.db"
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var localDB: LocalDB
+
+    private var mbinding:ActivityMainBinding?=null
+    private val binding get()= mbinding!!
+
+    var loginBtn=findViewById<Button>(R.id.login)
+    var joinBtn=findViewById<Button>(R.id.join)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        mbinding= ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        localDB= LocalDB(this, "LocalDB.db", null, 1) // SQLite 모듈 생성
 
-        binding.login.setOnClickListener { view->
-            val id = binding.id.text.toString()
-            val passwd = binding.password.text.toString()
-            val exist = localDB.login(id,passwd) // 로그인 실행
-            if(exist){ // 로그인 성공
-                val intent =Intent(this,main::class.java)
-                startActivity(intent)
-            }else{ // 실패
-                Toast.makeText(this@MainActivity, "아이디나 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
+        var localDB: LocalDB = LocalDB(applicationContext, "LocalDB.db", null, 1) // SQLite 모듈 생성
+
+        loginBtn.setOnClickListener {
+            val id=binding.id.text.toString()
+            val pw=binding.password.text.toString()
+            if(localDB.Result(bind.id.getText().toString(), bind.password.getText().toString())==true){
+                Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                var intentmain= Intent(applicationContext, main::class.java)
+                startActivity(intentmain)
+            }
+            else{
+                Toast.makeText(applicationContext, "로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.join.setOnClickListener { view->
-            val intent =Intent(this,Register::class.java)
-            startActivity(intent)
+
+        joinBtn.setOnClickListener {
+            var intentregi= Intent(applicationContext, Register::class.java)
+            startActivity(intentregi)
         }
     }
+
+
     override fun onDestroy() {// 엑티비티가 종료시 close
         localDB.close()
         super.onDestroy()

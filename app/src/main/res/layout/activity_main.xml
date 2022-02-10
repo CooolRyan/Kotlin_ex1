@@ -18,6 +18,7 @@
         android:layout_margin="10dp"
         android:hint="ID를 입력하세요"
         />
+
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"

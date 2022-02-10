@@ -6,20 +6,59 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 
-class LocalDB {
+
+class LocalDB (context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int):
+    SQLiteOpenHelper(context, name, factory, version){
 
     override fun onCreate(db:SQLiteDatabase?){
         if (db!= null){
-            createDatabase(db)
+            var sql:String ="CREATE TABLE if not exists localDB ("+ "NAME varchar(20)," + "ID varchar(20), " + "PASSWORD varchar(20),"+ "PASSWORD_OK varchar(20));"
+            db.execSQL(sql)
         }
     }
 
-    fun createDatabase(db:SQLiteDatabase){
-        var sql:String ="CREATE TABLE if not exists ${LocalDatas.userData.TABLE_NAME} ("+ "${BaseColumns._ID} integer primary key autoincrement, " + "${LocalDatas.userData.COLUMN_NAME_NAME} varchar(20)," + "${LocalDatas.userData.COLUMN_NAME_ID} varchar(20), " + "${LocalDatas.userData.COLUMN_NAME_PASSWORD} varchar(20)"+ ");"
 
-        db.execSQL(sql)
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+
     }
 
+    fun insert(
+        name: String, id: String, password: String, password_ok: String) {
+        var db: SQLiteDatabase = writableDatabase
+
+        db.execSQL(
+            "INSERT INTO MEMBER VALUES('" + name + "'" + ", '" + id + "'" + ", '" + password + "'" + ", '" + password_ok + "');"
+        )
+        db.close()
+    }
+
+    fun Result(ID:String, PASSWORD:String):Boolean{
+        var db:SQLiteDatabase=readableDatabase
+        var result:String=""
+
+        var cursor: Cursor = db.rawQuery("SELECT ID, PASSWORD FROM MEMBER", null)
+        while (cursor.moveToNext()) {
+            result = (cursor.getString(0))
+            if (result.equals(ID)) {
+                if (cursor.getString(1).equals(PASSWORD)) {
+                    return true
+                    break
+                } else {
+                    return false
+                }
+            }else {
+
+            }
+        }
+
+        return false
+    }
+
+
+
+
+
+    /*
     fun register(name:String, id:String, password:String){
         val db: SQLiteDatabase = writableDatabase
         val values = ContentValues().apply {
@@ -52,4 +91,5 @@ class LocalDB {
 
         
     }
+    */
 }
