@@ -50,6 +50,22 @@
 
     </LinearLayout>
 
+<Button
+    android:id="@+id/view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="view"
+    />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editNameResult"
+        android:layout_weight="1"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editNumResult"
+        android:layout_weight="1"/>
 
 </LinearLayout>
 

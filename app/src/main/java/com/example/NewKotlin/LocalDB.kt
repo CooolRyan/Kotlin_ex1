@@ -38,9 +38,9 @@ class LocalDB (context: Context?, name: String?, factory: SQLiteDatabase.CursorF
 
         var cursor: Cursor = db.rawQuery("SELECT ID, PASSWORD FROM localDB", null)
         while (cursor.moveToNext()) {
-            result = (cursor.getString(0))
+            result = (cursor.getString(1))
             if (result.equals(ID)) {
-                if (cursor.getString(1).equals(PASSWORD)) {
+                if (cursor.getString(2).equals(PASSWORD)) {
                     return true
                     break
                 } else {
